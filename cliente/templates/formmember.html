@@ -1,0 +1,91 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="col-sm-12 p-4">
+	 <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'member' %}">Lista Membru Choque Gym</a></li>
+            <li class="breadcrumb-item active">{{title}}       </li>
+          </ul>
+        </div>
+      </div>
+      <section>
+        <div class="container-fluid">
+                    {% if messages %}
+                        {% for message in messages %} 
+                            <div id="divmessage" class="alert alert-{{ message.tags }} alert-dismissable">
+                              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                              {{message}}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+          <div class="row mt-3">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between text-center">
+                  <div class="text-center">
+                    <h3>{{title}}</h3>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <div class="text-center mr-2">
+                      <button class="btn btn-sm btn-info" title="Add Data" onclick=self.history.back()> <i class="fa fa-arrow-left"></i> Back</button>
+                    </div>
+                  </div>
+                </div>
+                {% if page == "form" %}
+                <div class="card-body">
+                  {% csrf_token %}
+                  {% crispy form %}
+                </div>
+                {% endif %}
+                {% if page == "view" %}
+                <div class="card-body">
+                  <table class="table w-100 mb-4">
+                    <tr><th>Id</th><td>{{memberData.nu_id}}</td></tr>
+                    <tr><th>Naran Kompletu</th><td>{{memberData.naran}}</td></tr>
+                    <tr><th>Seksu</th><td>{{memberData.sexo}}</td></tr>
+                    <tr><th>Naturalidade</th><td>{{memberData.naturalidade}}</td></tr>
+                    <tr><th>Data Moris</th><td>{{memberData.data_moris}}</td></tr>
+                    <tr><th>Joint Date</th><td>{{memberData.join_date}}</td></tr>
+                    <tr><th>End Date</th><td>{{memberData.end_date}}</td></tr>
+                    <tr><th>Durasaun</th><td>Fulan {{memberData.get_duration_in_months}}</td></tr>
+                    <tr><th>Idade</th><td>{{memberData.get_age}} Anos</td></tr>
+                    <tr><th>Enderesu</th><td>{{memberData.enderesu}}</td></tr>
+                    <tr><th>Municípiu</th><td>{{memberData.municipio}}</td></tr>
+                    <tr><th>Status</th><td>{{memberData.status}}</td></tr>
+                    <tr><th>Nu. Kontaktu</th><td>{{memberData.phone}}</td></tr>
+                    <tr><th>Email</th><td>{{memberData.email}}</td></tr>
+                    <tr>
+                      <th>Fotografia</th>
+                      <td>
+                          {% if memberData.fotografia %}
+                              <img src="{{ memberData.fotografia.url }}" width="200" />
+                          {% else %}
+                              <p>No photo available</p>
+                          {% endif %}
+                      </td>
+                  </tr>
+                    <tr>
+                      <th>Dokumentus</th>
+                      <td>
+                        {% if memberData.documentos %}
+                          <a href="{{ memberData.documentos.url }}" target="_blank">Haree Dokumentus</a>:  {{ memberData.documentos.name }}
+                        {% else %}
+                          No PDF uploaded
+                        {% endif %}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+{% endblock %}

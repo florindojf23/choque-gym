@@ -1,0 +1,20 @@
+{% extends "main/login_layout.html" %}
+{% block content %}
+	<div class="row justify-content-center">
+		<div class="col-sm-6">
+			<div class="card shadow-lg pt-3 rounded">
+				<div class="card-header text-center bg-secondary">
+					<h5 style="color: #fff">LOGIN <b class="text-dark">E-Visitor</b></h5>
+				</div>
+				<div class="card-body">
+					<h6 class="text-center font-weight-light my-4">You have been logged out!</h6>
+					<div class="text-right">
+					<small class="text-muted">
+						<a class="btn btn-outline-primary btn-sm" href="{% url 'login' %}">Log In Again <i class="fa fa-arrow-circle-right"></i></a>
+					</small>
+					</div>
+				</div> <!--end card-body-->
+			</div> <!--end card-->
+		</div> <!--end col-->
+	</div> <!--end row-->
+{% endblock %}

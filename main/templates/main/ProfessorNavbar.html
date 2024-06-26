@@ -1,0 +1,23 @@
+{% load static %}
+<nav class="side-navbar bg-danger">
+      <div class="side-navbar-wrapper">
+        <!-- Sidebar Header    -->
+        <div class="sidenav-header bg-danger d-flex align-items-center justify-content-center">
+          <!-- User Info-->
+          <div class="sidenav-header-inner text-center">
+            <h2 class="h5">Recepsionista</h2><span>User Recepsionista</span>
+          </div>
+          <!-- Small Brand information, appears on minimized sidebar-->
+          <div class="sidenav-header-logo"><a href="{% url 'home' %}" class="brand-small text-center"> <strong class="text-dark">E-V</strong><strong class="text-dark"></strong></a></div>
+        </div>
+        <hr class="bg-white">
+        <!-- Sidebar Navigation Menus-->
+        <div class="main-menu">
+          <h6 class="sidenav-heading">Menu</h6>
+          <ul id="side-main-menu" class="side-menu list-unstyled">                  
+            <li class="{{active_varanda}}"><a href="{% url 'home' %}"> <i class="icon-home"></i>Home</a></li>
+            <li class="{{active_visitor}}"><a href="{% url 'home' %}"> <i class="icon-form"></i>Lista Vizitor</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>

@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h1>Members Reports</h1>
+    <table style="margin: auto; width: 80%; border-collapse: collapse; border: 1px solid #ddd;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="border: 1px solid #ddd; padding: 8px;">Member ID</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Name</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Sexo</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Idade</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Join Date</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">End Date</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Durasaun</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Status</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Municipio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members %}
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ member.nu_id }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ member.naran }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ member.sexo }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ member.get_age }} Anos</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ member.join_date }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ member.end_date }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">Fulan {{ member.get_duration_in_months }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ member.status }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ member.municipio }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="border: 1px solid #ddd; padding: 8px;">No members found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

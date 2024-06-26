@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h1>Today's Schedule ({{ today }})</h1>
+    <table style="margin: auto; width: 80%; border-collapse: collapse; border: 1px solid #ddd;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="border: 1px solid #ddd; padding: 8px;">Class Name</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Start Time</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gym_class in classes_today %}
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ gym_class.name }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ gym_class.start_time }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ gym_class.end_time }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" style="border: 1px solid #ddd; padding: 8px;">No classes scheduled for today.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{% url 'weekly_schedule' %}">View Weekly Schedule</a>
+</div>
+{% endblock %}
