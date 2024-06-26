@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-usdjh!$52_-7ib_@ygm1^m)e6dpr5==scv6i2+e@i2+h%8q6!b"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", cast=bool)
+DEBUG = True
 
 # ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
 ALLOWED_HOSTS = ['https://choquegym.onrender.com','*']
