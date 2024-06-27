@@ -14,7 +14,7 @@ class Member(models.Model):
     end_date = models.DateField(null=True)
     enderesu = models.CharField(max_length=200,null=True,blank=True)
     municipio = models.ForeignKey(Municipality, on_delete=models.CASCADE,null=True,blank=True)
-    status = models.ForeignKey(Status, on_delete=models.CASCADE,null=True,blank=True)
+    status = models.CharField(choices=[('Solteiru/a','Solteiru/a'),('Marridu/a','Marridu/a')],max_length=10,null=True,blank=True)
     phone = models.CharField(max_length=200,null=True)
     email = models.EmailField(max_length=200,null=True,blank=True)
     fotografia = models.ImageField(upload_to='images/',null=True, blank=True)

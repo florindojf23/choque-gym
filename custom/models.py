@@ -8,13 +8,6 @@ class Tinan(models.Model):
 	def __str__(self):
 		return self.tinan
 
-class Status(models.Model):
-	name = models.CharField(max_length=32, null=True)
-
-	def __str__(self):
-		template = '{0.name}'
-		return template.format(self)
-		
 # class Status(models.Model):
 #     name = models.CharField(max_length=32, null=True)
 
@@ -30,6 +23,7 @@ class Municipality(models.Model):
 	code = models.CharField(max_length=5, null=True, blank = True)
 	name = models.CharField(max_length=100)
 	hckey = models.CharField(max_length=32, null=True ,  blank = True)
+
 	def __str__(self):
 		template = '{0.name}'
 		return template.format(self)
