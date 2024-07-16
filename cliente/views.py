@@ -35,6 +35,7 @@ def member(request):
     }
     return render(request, 'listamember.html',data)
 
+@login_required
 def createMember(request):
     tinan = Tinan.objects.all().order_by('-id')
     form = MemberForm()
@@ -52,6 +53,7 @@ def createMember(request):
     }
     return render(request, 'formmember.html',data)
 
+@login_required
 def updateMember(request, id):
     tinan = Tinan.objects.all().order_by('-id')
     member= Member.objects.get(id=id)
@@ -70,11 +72,13 @@ def updateMember(request, id):
     }
     return render(request, 'formmember.html',data)
 
+@login_required
 def deleteMember(request,pk):
     member = Member.objects.get(id=pk)
     member.delete()
     return redirect('member')
 
+@login_required
 def detailMember(request,pk):
     memberData = get_object_or_404(Member,id=pk)
     data = {
@@ -85,6 +89,7 @@ def detailMember(request,pk):
     }
     return render(request, 'formmember.html',data)
 
+@login_required
 def csv_member(request):
     # replace with the fields you need 
     fields = ['nu_id','naran','sexo','naturalidade','join_date','end_date','enderesu','municipio__name','status__name','phone','email']
@@ -100,6 +105,7 @@ def csv_member(request):
         # return
     return response
 
+@login_required
 def pdf_member(request):
     member = Member.objects.all()
     data = {'dadus':member,
@@ -116,7 +122,7 @@ def render_to_pdf(template_src,context_dict={}):
         return HttpResponse(result.getvalue(),content_type='application/pdf')
     return None
 
-
+@login_required
 def upload_csv(request):
     if request.method == 'POST':
         form = UploadCSVForm(request.POST, request.FILES)
@@ -197,6 +203,7 @@ def gymclass(request):
     }
     return render(request, 'listagymclass.html',data)
 
+@login_required
 def createGymClass(request):
     form = GymClassForm()
 
@@ -212,6 +219,7 @@ def createGymClass(request):
     }
     return render(request, 'gymclassform.html',data)
 
+@login_required
 def updateGymClass(request, id):
     gymclass= GymClass.objects.get(id=id)
     form = GymClassForm(instance=gymclass)
@@ -228,11 +236,13 @@ def updateGymClass(request, id):
     }
     return render(request, 'gymclassform.html',data)
 
+@login_required
 def deleteGymClass(request,pk):
     gymclass = GymClass.objects.get(id=pk)
     gymclass.delete()
     return redirect('gymclass')
 
+@login_required
 def detailGymClass(request,pk):
     gymclassdata = get_object_or_404(GymClass,id=pk)
     data = {
@@ -243,6 +253,7 @@ def detailGymClass(request,pk):
     }
     return render(request, 'gymclassform.html',data)
 
+@login_required
 def csv_gymclass(request):
     # replace with the fields you need 
     fields = ['name','description','start_time','end_time','days_of_week','payment_per_month']
@@ -258,6 +269,7 @@ def csv_gymclass(request):
         # return
     return response
 
+@login_required
 def pdf_gymclass(request):
     gymclass = GymClass.objects.all()
     data = {'dadus':gymclass,
@@ -285,6 +297,7 @@ def enrollment(request):
     }
     return render(request, 'listaenroll.html',data)
 
+@login_required
 def createEnrollment(request):
     form = EnrollmentForm()
 
@@ -300,6 +313,7 @@ def createEnrollment(request):
     }
     return render(request, 'enrollform.html',data)
 
+@login_required
 def updateEnrollment(request, id):
     enrollment= Enrollment.objects.get(id=id)
     form = EnrollmentForm(instance=enrollment)
@@ -316,11 +330,13 @@ def updateEnrollment(request, id):
     }
     return render(request, 'enrollform.html',data)
 
+@login_required
 def deleteEnrollment(request,pk):
     enrollform = Enrollment.objects.get(id=pk)
     enrollform.delete()
     return redirect('enrollment')
 
+@login_required
 def detailEnrollment(request,pk):
     enrolldata = get_object_or_404(Enrollment,id=pk)
     data = {
@@ -331,6 +347,7 @@ def detailEnrollment(request,pk):
     }
     return render(request, 'enrollform.html',data)
 
+@login_required
 def csv_enroll(request):
     # Define the fields you want to include in the CSV
     fields = ['member__naran', 'gym_class__name', 'enrollment_date', 'get_total_payment']
@@ -357,6 +374,7 @@ def csv_enroll(request):
 
     return response
 
+@login_required
 def pdf_enroll(request):
     enrollment = Enrollment.objects.all()
     data = {'dadus':enrollment,

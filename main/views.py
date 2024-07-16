@@ -19,6 +19,7 @@ def dashboard(request):
     }
     return render(request,'main/dashboard.html',context)
 
+@login_required
 def dashboard(request):
     total_member = Member.objects.count()
     mane = Member.objects.filter(sexo='Mane').count()
@@ -37,6 +38,7 @@ class MyPasswordChangeView(PasswordChangeView):
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'main/password_change_done.html'
 
+@login_required
 def todays_schedule(request):
     today = date.today().strftime("%A")  # Get current day of the week as string
     classes_today = GymClass.objects.filter(days_of_week__icontains=today)
@@ -47,6 +49,7 @@ def todays_schedule(request):
     }
     return render(request, 'main/todays_schedule.html', context)
 
+@login_required
 def weekly_schedule(request):
     today = date.today()
     week_days = [(today + timedelta(days=i)).strftime("%A") for i in range(7)]  # List of days in the week starting from today
@@ -58,19 +61,22 @@ def weekly_schedule(request):
     }
     return render(request, 'main/weekly_schedule.html', context)
 
+@login_required
 def member_report(request):
     members = Member.objects.all()
     return render(request, 'main/member_report.html', {'members': members})
 
+@login_required
 def class_report(request):
     classes = GymClass.objects.all()
     return render(request, 'main/class_report.html', {'classes': classes})
 
+@login_required
 def enrollment_report(request):
     enrollments = Enrollment.objects.select_related('member', 'gym_class').all()
     return render(request, 'main/enrollment_report.html', {'enrollments': enrollments})
 
-
+@login_required
 def charts(request):
 	data = {
 	'title':"Charts"
